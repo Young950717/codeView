@@ -1,7 +1,10 @@
 import defineReactiveData from './reactive'
-function Observer(data) {
+import { arrMethods } from './array'
+import observeArr from './observeArr'
+function Observer (data) {
     if (data instanceof Array) {
-
+        data.__proto__ = arrMethods
+        observeArr(data)
     } else {
         this.walk(data)
     }
