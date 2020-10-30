@@ -11,31 +11,101 @@ class DoublyLinkedList {
         this.tail = null
         this.length = 0
     }
-    append () {
+    append (data) {
+        let node = new Node(data)
+        if (this.length === 0) {
+            this.head = node
+            this.tail = node
+            this.length++
+            return this
+        }
+        this.tail.next = node
+        node.prev = this.tail
+        this.tail = node
+        this.length++
+        return this
 
     }
-    insert () {
+    insert (position, data) {
 
     }
-    get () {
-
+    get (position) {
+        if (position < 0 || position > this.length - 1) return 'position is a invalid parameter'
+        let directionKey
+        let current
+        let index = 0
+        if (position > this.length / 2) {
+            position = this.length - 1 - position
+            current = this.tail
+            directionKey = 'prev'
+        } else {
+            current = this.head
+            directionKey = 'next'
+        }
+        while (index++ < position) {
+            current = current[directionKey]
+        }
+        return current
     }
-    set () {
-
+    set (position, data) {
+        if (position === this.length) {
+            this.append(data)
+        }
+        let node = this.get(position)
+        node.data = data
+        return true
     }
-    indexOf () {
-
+    indexOf (data) {
+        let current = this.head
+        let index = 0
+        while (current) {
+            if (current.data === data) {
+                return index
+            }
+            current = current.next
+            index++
+        }
+        return -1
     }
-    remove () {
-
+    remove (data) {
+        let index = this.indexOf(data)
+        return this.removeAt(index)
     }
-    removeAt () {
+    removeAt (position) {
+        if (position < 0 || position > this.length - 1) return 'position is a invalid parameter'
+        let directionKey
+        let current
+        let prev
+        let index = 0
+        if (position > this.length / 2) {
+            directionKey = 'prev'
+            position = this.length - 1 - position
+            current = this.tail
+            prev = current[directionKey]
 
-    }
-    update () {
-
+        } else {
+            directionKey = 'next'
+            prev = this.head
+            current = prev[directionKey]
+        }
+        while (index++ < position) {
+            current = current[directionKey]
+            prev = prev[directionKey]
+        }
+        return current
     }
     toString () {
-
+        let str = 'head=>'
+        let current = this.head
+        while (current) {
+            str = str + current.data + '=>'
+            current = current.next
+        }
+        return str
     }
 }
+
+let dl = new DoublyLinkedList()
+dl.append(1).append(2).append(3).append(4).append(5).append(6).append(7).append(8).append(9).append(10)
+// dl.set(5, 999)
+console.log(dl.indexOf(10))

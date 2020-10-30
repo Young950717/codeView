@@ -101,11 +101,6 @@ class LinkedList {
         }
 
     }
-    update (position, data) {
-        let node = this.get(position)
-        node.data = data
-        return true
-    }
     toString () {
         let str = 'head=>'
         let current = this.head
