@@ -14,8 +14,8 @@ class LinkedList {
         this.head = null
         this.length = 0
     }
-    append (el) {
-        let node = new Node(el)
+    append (data) {
+        let node = new Node(data)
         // 若长度为0 直接让头指针指向该节点
         if (this.length === 0) {
             this.head = node
@@ -30,7 +30,32 @@ class LinkedList {
         this.length++
         return this
     }
-    insert (el, position) { }
+    insert (position, data) {
+        if (position < 0 || position > this.length) return 'invalid parameter'
+        let node = new Node(data)
+        // 排除首尾
+        if (position === 0) {
+            node.next = this.head
+            this.head = node
+            return true
+        }
+        if (position === this.length) {
+            this.append(data)
+            return true
+        }
+        // 双指针
+        let prev = this.head
+        let current = prev.next
+        let index = 1
+        while (index++ < position) {
+            current = current.next
+            prev = prev.next
+        }
+        prev.next = node
+        node.next = current
+        return true
+
+    }
     get (position) {
         if (position < 0 || position > this.length - 1) return 'invalid parameter'
         let current = this.head
@@ -40,17 +65,17 @@ class LinkedList {
         }
         return current
     }
-    set (el, position) {
+    set (position, data) {
         let node = this.get(position)
-        node.data = el
+        node.data = data
         return true
     }
-    indexOf (el) {
+    indexOf (data) {
         if (this.head === null) return -1
         let current = this.head
         let index = 0
         while (current) {
-            if (current.data === el) {
+            if (current.data === data) {
                 return index
             }
             current = current.next
@@ -59,8 +84,8 @@ class LinkedList {
         return -1
 
     }
-    remove (el) {
-        let index = this.indexOf(el)
+    remove (data) {
+        let index = this.indexOf(data)
         return this.removeAt(index)
     }
     removeAt (position) {
@@ -76,6 +101,11 @@ class LinkedList {
         }
 
     }
+    update (position, data) {
+        let node = this.get(position)
+        node.data = data
+        return true
+    }
     toString () {
         let str = 'head=>'
         let current = this.head
@@ -87,9 +117,8 @@ class LinkedList {
     }
 
 }
-let t = new LinkedList()
-t.append(1).append(2).append(3).append(4).append(5)
+// let t = new LinkedList()
+// t.append(1).append(2).append(3).append(4).append(5)
 // t.set('333', 1)
-t.removeAt(0)
-console.log(t.toString())
-// export default LinkedList
+// t.insert(4, 6)
+// console.log(t.toString())
