@@ -11,7 +11,7 @@ class DoublyLinkedList {
         this.tail = null
         this.length = 0
     }
-    append (data) {
+    append(data) {
         let node = new Node(data)
         if (this.length === 0) {
             this.head = node
@@ -26,10 +26,44 @@ class DoublyLinkedList {
         return this
 
     }
-    insert (position, data) {
+    insert(position, data) {
+        if (position < 0 || position > this.length - 1) return 'position is a invalid parameter'
+        let node = new Node(data)
+        let directionKey
+        let current
+        let prev
+        let index
+        if (position > this.length / 2) {
+            index = 0
+            position = this.length - 1 - position
+            prev = this.tail
+            current = prev.prev
+            directionKey = 'prev'
+        } else {
+            index = 0
+            prev = this.head
+            current = prev.next
+            directionKey = 'next'
+        }
+        while (index++ < position) {
+            current = current[directionKey]
+            prev = prev[directionKey]
+        }
+        if (directionKey === 'prev') {
+            prev.prev = node
+            node.next = prev
+            current.next = node
+            node.prev = current
+        } else {
+            prev.next = node
+            node.prev = prev
+            current.prev = node
+            node.next = current
+        }
 
+        return this
     }
-    get (position) {
+    get(position) {
         if (position < 0 || position > this.length - 1) return 'position is a invalid parameter'
         let directionKey
         let current
@@ -47,7 +81,7 @@ class DoublyLinkedList {
         }
         return current
     }
-    set (position, data) {
+    set(position, data) {
         if (position === this.length) {
             this.append(data)
         }
@@ -55,7 +89,7 @@ class DoublyLinkedList {
         node.data = data
         return true
     }
-    indexOf (data) {
+    indexOf(data) {
         let current = this.head
         let index = 0
         while (current) {
@@ -67,11 +101,11 @@ class DoublyLinkedList {
         }
         return -1
     }
-    remove (data) {
+    remove(data) {
         let index = this.indexOf(data)
         return this.removeAt(index)
     }
-    removeAt (position) {
+    removeAt(position) {
         if (position < 0 || position > this.length - 1) return 'position is a invalid parameter'
         let directionKey
         let current
@@ -94,7 +128,7 @@ class DoublyLinkedList {
         }
         return current
     }
-    toString () {
+    toString() {
         let str = 'head=>'
         let current = this.head
         while (current) {
@@ -108,4 +142,5 @@ class DoublyLinkedList {
 let dl = new DoublyLinkedList()
 dl.append(1).append(2).append(3).append(4).append(5).append(6).append(7).append(8).append(9).append(10)
 // dl.set(5, 999)
-console.log(dl.indexOf(10))
+dl.insert(8, 'xxx')
+console.log(dl.toString())
