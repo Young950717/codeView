@@ -27,3 +27,5 @@ class Stack {
         return this.item.toString()
     }
 }
+
+module.exports = Stack

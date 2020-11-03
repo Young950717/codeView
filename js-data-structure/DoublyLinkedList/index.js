@@ -1,3 +1,8 @@
+/**
+ * @description 双向链表类
+ * @author Young
+ */
+
 class Node {
     constructor(data) {
         this.data = data
@@ -11,7 +16,7 @@ class DoublyLinkedList {
         this.tail = null
         this.length = 0
     }
-    append(data) {
+    append (data) {
         let node = new Node(data)
         if (this.length === 0) {
             this.head = node
@@ -26,7 +31,7 @@ class DoublyLinkedList {
         return this
 
     }
-    insert(position, data) {
+    insert (position, data) {
         if (position < 0 || position > this.length - 1) return 'position is a invalid parameter'
         let node = new Node(data)
         let directionKey
@@ -60,10 +65,10 @@ class DoublyLinkedList {
             current.prev = node
             node.next = current
         }
-
+        this.length++
         return this
     }
-    get(position) {
+    get (position) {
         if (position < 0 || position > this.length - 1) return 'position is a invalid parameter'
         let directionKey
         let current
@@ -81,7 +86,7 @@ class DoublyLinkedList {
         }
         return current
     }
-    set(position, data) {
+    set (position, data) {
         if (position === this.length) {
             this.append(data)
         }
@@ -89,7 +94,7 @@ class DoublyLinkedList {
         node.data = data
         return true
     }
-    indexOf(data) {
+    indexOf (data) {
         let current = this.head
         let index = 0
         while (current) {
@@ -101,11 +106,11 @@ class DoublyLinkedList {
         }
         return -1
     }
-    remove(data) {
+    remove (data) {
         let index = this.indexOf(data)
         return this.removeAt(index)
     }
-    removeAt(position) {
+    removeAt (position) {
         if (position < 0 || position > this.length - 1) return 'position is a invalid parameter'
         let directionKey
         let current
@@ -128,7 +133,7 @@ class DoublyLinkedList {
         }
         return current
     }
-    toString() {
+    toString () {
         let str = 'head=>'
         let current = this.head
         while (current) {
@@ -144,3 +149,5 @@ dl.append(1).append(2).append(3).append(4).append(5).append(6).append(7).append(
 // dl.set(5, 999)
 dl.insert(8, 'xxx')
 console.log(dl.toString())
+
+module.exports = DoublyLinkedList

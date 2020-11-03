@@ -2,6 +2,7 @@
  * @description 单项链表类
  * @author Young
  */
+
 class Node {
     constructor(data) {
         this.data = data
@@ -117,3 +118,4 @@ class LinkedList {
 // t.set('333', 1)
 // t.insert(4, 6)
 // console.log(t.toString())
+module.exports = LinkedList
