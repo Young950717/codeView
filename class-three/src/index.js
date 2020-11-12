@@ -1,5 +1,6 @@
 import { createElement, render, renderDom } from './virtuaDom'
-const vDom = createElement('ul', {
+import domDiff from './domDIff'
+const vDom1 = createElement('ul', {
     class: 'list',
     style: 'width:300px; height:300px; background-color:skyblue;'
 },
@@ -28,9 +29,38 @@ const vDom = createElement('ul', {
 
     ]
 )
-const rDom = render(vDom)
-console.log(vDom)
+const vDom2 = createElement('ul', {
+    class: 'list-warp',
+    style: 'width:300px; height:300px; background-color:skyblue;'
+},
+    [
+        createElement('li',
+            { class: 'item', 'data-index': 0 },
+            [
+                createElement('p', { class: 'title' },
+                    ['特殊列表页'])
+            ]
+        ),
+        createElement('li',
+            { class: 'item', 'data-index': 1 },
+            [
+                createElement('p',
+                    { class: 'text' },
+                    []
+                )
+            ]),
+        createElement('div ',
+            { class: 'item', 'data-index': 2 },
+            ['第三个列表项'])
+
+    ]
+)
+const rDom = render(vDom1)
+console.log(vDom1)
 console.log(rDom)
 renderDom(rDom,
     document.querySelector('#app')
 )
+
+const patches = domDiff(vDom1, vDom2)
+console.log(patches)
