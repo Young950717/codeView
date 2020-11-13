@@ -37,6 +37,11 @@ function vNodeWalk (oldNode, newNode, index) {
             })
         }
         childrenWalk(oldNode.children, newNode.children)
+    } else {
+        vnPatch.push({
+            type: REPLACE,
+            newNode
+        })
     }
 
     if (Object.keys(vnPatch).length > 0) {

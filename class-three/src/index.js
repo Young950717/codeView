@@ -1,5 +1,6 @@
 import { createElement, render, renderDom } from './virtuaDom'
 import domDiff from './domDIff'
+import doPAtch from './doPAtch'
 const vDom1 = createElement('ul', {
     class: 'list',
     style: 'width:300px; height:300px; background-color:skyblue;'
@@ -49,7 +50,7 @@ const vDom2 = createElement('ul', {
                     []
                 )
             ]),
-        createElement('div ',
+        createElement('div',
             { class: 'item', 'data-index': 2 },
             ['第三个列表项'])
 
@@ -63,4 +64,5 @@ renderDom(rDom,
 )
 
 const patches = domDiff(vDom1, vDom2)
+doPAtch(rDom, patches)
 console.log(patches)
