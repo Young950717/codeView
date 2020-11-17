@@ -57,12 +57,9 @@ const vDom2 = createElement('ul', {
     ]
 )
 const rDom = render(vDom1)
-console.log(vDom1)
-console.log(rDom)
 renderDom(rDom,
     document.querySelector('#app')
 )
 
 const patches = domDiff(vDom1, vDom2)
 doPAtch(rDom, patches)
-console.log(patches)
