@@ -1,5 +1,5 @@
 /**
- * @description 二叉搜索树类
+ * @description 二叉搜索树类 使用伪指针来构造一颗数，难点在于删除一个节点，考虑的情况比较复杂
  * @author Young
  */
 

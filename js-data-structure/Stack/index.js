@@ -1,5 +1,5 @@
 /**
- * @description 数组模拟栈
+ * @description 栈类 FILO 数组模拟栈 原生api有提供栈的模拟方法
  * @author Young
  */
 

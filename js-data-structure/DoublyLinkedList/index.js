@@ -1,5 +1,5 @@
 /**
- * @description 双向链表类
+ * @description 双向链表类 使用伪指针来模拟双向链表，对比与单向链表的好处是某些时候可以提高查找元素的效率
  * @author Young
  */
 

@@ -1,5 +1,5 @@
 /**
- * @description 集合类
+ * @description 集合类 使用对象来模拟集合，标志性的api有并集，交集，差集以及判断是否是该集合的子集
  * @author Young
  */
 

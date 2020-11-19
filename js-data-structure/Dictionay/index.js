@@ -57,3 +57,4 @@ dict.remove("height")
 console.log(dict.keys())
 
 // dict.clear()
+module.exports = Dictionay

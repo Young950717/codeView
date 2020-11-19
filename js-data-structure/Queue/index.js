@@ -1,5 +1,5 @@
 /**
- * @description 数组模仿队列类
+ * @description 队列类 FIFO 采用数组结构来模拟队列，原生api有提供队列的方法
  * @author Young
  */
 

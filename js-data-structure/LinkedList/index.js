@@ -1,5 +1,5 @@
 /**
- * @description 单项链表类
+ * @description 单项链表类 使用伪指针来模拟单向链表
  * @author Young
  */
 
