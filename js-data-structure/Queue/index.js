@@ -6,7 +6,6 @@
 class Queue {
     constructor() {
         this.item = []
-        this.size = this.item.length
     }
     enqueue (data) {
         this.item.push(data)
@@ -18,8 +17,11 @@ class Queue {
     front () {
         return this.item[0]
     }
+    size () {
+        return this.item.length
+    }
     isEmpty () {
-        return this.size === 0
+        return this.item.length === 0
     }
     toString () {
         return this.item.toString()

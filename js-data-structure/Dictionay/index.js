@@ -41,20 +41,20 @@ class Dictionay {
 }
 
 // 创建字典对象
-const dict = new Dictionay()
+// const dict = new Dictionay()
 
-dict.set("age", 18)
-dict.set("name", "Young")
-dict.set("height", 2.14)
-dict.set("address", "深圳")
+// dict.set("age", 18)
+// dict.set("name", "Young")
+// dict.set("height", 2.14)
+// dict.set("address", "深圳")
 
-console.log(dict.keys())
-console.log(dict.values())
-console.log(dict.size())
-console.log(dict.get("name"))
+// console.log(dict.keys())
+// console.log(dict.values())
+// console.log(dict.size())
+// console.log(dict.get("name"))
 
-dict.remove("height")
-console.log(dict.keys())
+// dict.remove("height")
+// console.log(dict.keys())
 
 // dict.clear()
 module.exports = Dictionay
