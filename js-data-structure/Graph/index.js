@@ -60,7 +60,23 @@ class Graph {
 
     }
     // Depth-First Search 深度优先
-    dfs () { }
+    dfs (initV, callback) {
+        const colors = this.initColor()
+        this._dfsVisit(initV, colors, callback)
+    }
+
+    _dfsVisit (v, colors, callback) {
+        colors[v] = 'gray'
+        callback(v)
+        const edges = this.edges.get(v) // 或者与改顶点相连的所有点
+        edges.forEach(e => {
+            if (colors[e] === 'white') {
+                // 递归处理相连并为访问的点
+                this._dfsVisit(e, colors, callback)
+            }
+
+        })
+    }
 
     initColor () {
         const colors = []
@@ -90,8 +106,14 @@ graph.addEdge('B', 'E')
 graph.addEdge('B', 'F')
 graph.addEdge('E', 'I')
 // console.log(graph.toString())
-let str = ''
+let str1 = ''
 graph.bfs(graph.vertexes[0], v => {
-    str = str + v + ' '
+    str1 = str1 + v + ' '
 })
-console.log(str)
+console.log(str1)
+
+let str2 = ''
+graph.dfs(graph.vertexes[0], v => {
+    str2 = str2 + v + ' '
+})
+console.log(str2)
