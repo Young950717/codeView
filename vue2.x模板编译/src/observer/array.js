@@ -1,8 +1,14 @@
-import { ARR_METHOD } from './config'
-import observeArr from './observeArr'
+const ARR_METHOD = [
+    'push',
+    'pop',
+    'shift',
+    'unshift',
+    'splice',
+    'sort',
+    'reverse'
+]
 var originArrMethods = Array.prototype // 原始原型引用
 var arrMethods = Object.create(originArrMethods) // 拷贝
-
 ARR_METHOD.map(function (m) {
     // 重写方法
     arrMethods[m] = function () {
@@ -24,6 +30,11 @@ ARR_METHOD.map(function (m) {
         return rt
     }
 })
+function observeArr (arr) {
+    for (var i = arr; i < arr.length; i++) {
+        observe(arr[i])
+    }
+}
 export {
     arrMethods
 }

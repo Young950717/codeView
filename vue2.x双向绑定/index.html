@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{ song }}</h1>
+        <p>《{{ album.name }}》是{{ singer }}2003年7月发行的专辑</p>
+        <p>
+            《{{ songObj.wp }}》是一首很好听的歌哦
+            <span>《{{ songObj.zzzs }}》也不错</span>
+        </p>
+        <p>主打歌为{{ album.theme }}</p>
+        <p>作词人为{{ singer }}等等{{ singer3 }}。</p>
+        <p>作词人为{{ singer2 }}等等。</p>
+        我们给个人都有罪，犯着不同的罪
+        <div>
+            <input v-model="testModel" type="text">
+        </div>
+    </div>
+    <!--实现的mvvm-->
+    <script src="dist/md/mvvm.js"></script>
+    <script>
+        // 写法和Vue一样
+        let mvvm = new Mvvm({
+            el: '#app',
+            data: {
+                song: '同一种调调',
+                album: {
+                    name: '叶惠美',
+                    theme: '以父之名'
+                },
+                songObj: {
+                    wp: '外婆',
+                    zzzs: '止战之殇'
+                },
+                singer: '周杰伦',
+                singer2: 'jay',
+                singer3: '小公举',
+                testModel: '我靠'
+
+            }
+        })
+        // mvvm.singer = 123
+        // console.log(mvvm.singer)
+    </script>
+</body>
+
+</html>
