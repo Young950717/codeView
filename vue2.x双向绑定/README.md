@@ -74,6 +74,7 @@ function Mvvm (options = {}) {
 **观察者**
 ```javascript
 // 观察者构造函数
+// 观察者构造函数
 function Observe (data) {
     let dep = new Dep()
     for (const key in data) {
@@ -94,7 +95,7 @@ function Observe (data) {
         })
     }
 }
-// 外部
+// 深度递归处理传入的data，如果是null undefined或者是值类型的话就最直接return
 function observe (data) {
     if (!data || typeof data !== 'object') return
     return new Observe(data)
@@ -105,8 +106,7 @@ function observe (data) {
 function Compile (el, vm) {
     // 将元素挂在到vm上
     vm.$el = document.querySelector(el)
-    // console.log(vm);
-    // 创建文本随便，方便传输
+    // 创建文本碎片，方便传输
     let fragment = document.createDocumentFragment()
     let child
     while (child = vm.$el.firstChild) {
@@ -128,12 +128,11 @@ function Compile (el, vm) {
                     node.textContent = txt.replace(reg, (matched, placeholder) => {
                         // console.log(placeholder)
                         // 添加监听事件
-                        new Watcher(vm, placeholder, replaceTxt => {
-                            node.textContent = txt.replace(reg, replaceTxt).trim()
-                        })
-                        return placeholder.split('.').reduce((val, key) => {
+                        new Watcher(vm, placeholder, replaceTxt)
+                        // console.log(placeholder.split('.'))
+                        return placeholder.split('.').reduce((vm, key) => {
                             key = key.trim()
-                            return val[key]
+                            return vm[key]
                         }, vm)
                     })
                 })()
@@ -143,18 +142,26 @@ function Compile (el, vm) {
                 Array.from(attrs).forEach(attr => {
                     // console.log(attr)
                     let name = attr.name
-                    let exp = attr.value // testModel
-                    // console.log(name + '=====', exp);
+                    let exp = attr.value
                     if (name.includes('v-model')) {
-                        node.value = vm[exp]
+                        node.value = exp.split('.').reduce((vm, key) => {
+                            key = key.trim()
+                            return vm[key]
+                        }, vm)
                     }
                     new Watcher(vm, exp, newVal => {
                         node.value = newVal
                     })
                     node.addEventListener('input', (e) => {
-                        let newVal = e.target.value
-                        console.log(newVal)
-                        vm[exp] = newVal
+                        const newVal = e.target.value
+                        const arr = exp.trim().split('.')
+                        return arr.reduce((prev, next, currentIndex) => {
+                            if (currentIndex === arr.length - 1) {
+                                return (prev[next] = newVal)
+                            }
+                            return prev[next]
+                        }, vm)
+
                     })
                 })
             }
