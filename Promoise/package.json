@@ -1,0 +1,12 @@
+{
+  "name": "Promoise",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./index.js -i ./data/"
+  },
+  "keywords": [],
+  "author": "Young",
+  "license": "ISC"
+}
