@@ -188,7 +188,8 @@ console.log(t.next().value)
 console.log(t.next().value)
 console.log(t.next().value)
  ```
- 这么改造的话就可以一个一个的把人给抽出来，且没有用3个for循环
+ 这么改造的话就可以一个一个的把人给抽出来，且没有用3个for循环  
+ 
 2. 斐波那契数列
 
 传统递归
