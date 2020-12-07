@@ -94,3 +94,114 @@
   // g.throw(new Error('制造错误'))
   // console.log(g.next())
 }
+
+// 抽奖的一个例子
+{
+  function draw (first = 1, second = 3, third = 5) {
+    // 奖品池
+    const firstPrize = ['1A', '1B', '1C', '1D', '1E', '1F']
+    const secondPrize = ['2A', '2B', '2C', '2D', '2E', '2F', '2G', '2H', '2I']
+    const thirdPrize = ['3A', '3B', '3C', '3D', '3E', '3F', '3G', '3H', '3I', '3J', '3K', '3L', '3M', '3N', '3O', '3P', '3Q']
+    let result = []
+    let random
+    // 一等奖
+    for (let i = 0; i < first; i++) {
+      random = Math.floor(Math.random() * firstPrize.length)
+      result = result.concat(firstPrize.splice(random, 1))
+    }
+    // 二等奖
+    for (let i = 0; i < second; i++) {
+      random = Math.floor(Math.random() * secondPrize.length)
+      result = result.concat(secondPrize.splice(random, 1))
+    }
+    // 三等奖
+    for (let i = 0; i < third; i++) {
+      random = Math.floor(Math.random() * thirdPrize.length)
+      result = result.concat(thirdPrize.splice(random, 1))
+    }
+    return result
+  }
+  // let t = draw()
+  // for (const value of t) {
+  //   console.log(value)
+  // }
+}
+
+// 抽奖Generator改写
+{
+  function* draw (first = 1, second = 3, third = 5) {
+    // 奖品池
+    const firstPrize = ['1A', '1B', '1C', '1D', '1E', '1F']
+    const secondPrize = ['2A', '2B', '2C', '2D', '2E', '2F', '2G', '2H', '2I']
+    const thirdPrize = ['3A', '3B', '3C', '3D', '3E', '3F', '3G', '3H', '3I', '3J', '3K', '3L', '3M', '3N', '3O', '3P', '3Q']
+    let count = 0
+    let random
+    while (1) {
+      if (count < first) {
+        random = Math.floor(Math.random() * firstPrize.length)
+        yield firstPrize[random]
+        count++
+        firstPrize.splice(random, 1)
+      } else if (count < first + second) {
+        random = Math.floor(Math.random() * secondPrize.length)
+        yield secondPrize[random]
+        count++
+        secondPrize.splice(random, 1)
+      } else if (count < first + second + third) {
+        random = Math.floor(Math.random() * thirdPrize.length)
+        yield thirdPrize[random]
+        count++
+        thirdPrize.splice(random, 1)
+      } else {
+        return '结束了'
+      }
+    }
+  }
+  // let t = draw()
+  // console.log(t.next().value)
+  // console.log(t.next().value)
+  // console.log(t.next().value)
+  // console.log(t.next().value)
+  // console.log(t.next().value)
+  // console.log(t.next().value)
+  // console.log(t.next().value)
+  // console.log(t.next().value)
+  // console.log(t.next().value)
+  // console.log(t.next().value)
+  // console.log(t.next().value)
+  // console.log(t.next().value)
+}
+
+
+// 斐波那契数列 es5
+{
+  function Fibonacci (n) {
+    let res
+    if (n === 1 || n === 2) {
+      return res = 1
+    }
+    return Fibonacci(n - 2) + Fibonacci(n - 1)
+  }
+  // console.log(Fibonacci())
+}
+
+{
+  function* Fibonacci (n) {
+    let current = 1
+    let = last = 0
+    while (n--) {
+      yield current
+      var temp = current
+      current += last
+      last = temp
+    }
+  }
+  // var o = feb(10), res, result = [];
+  let o = Fibonacci(10)
+  let res
+  const result = []
+  while (!(res = o.next()).done) {
+    result.push(res.value)
+  }
+  console.log(result)
+}
