@@ -18,22 +18,42 @@ const ajaxData = {
 // res = res.concat(ajaxData.allGames.moba).concat(ajaxData.allGames.fps).concat(ajaxData.allGames.role)
 // console.log(res)
 // 方法2 往对象里面添加可迭代协议
-ajaxData[Symbol.iterator] = function () {
+// ajaxData[Symbol.iterator] = function () {
+//   let allGames = this.allGames
+//   let keys = Reflect.ownKeys(allGames)
+//   let values = []
+//   return {
+//     next () {
+//       if (!values.length) {
+//         if (keys.length) {
+//           values = allGames[keys[0]]
+//           keys.shift()
+//         }
+//       }
+//       return {
+//         done: !values.length,
+//         value: values.shift()
+//       }
+//     }
+//   }
+// }
+
+// 使用Generator改写
+ajaxData[Symbol.iterator] = function* () {
   let allGames = this.allGames
   let keys = Reflect.ownKeys(allGames)
   let values = []
-  return {
-    next () {
-      if (!values.length) {
-        if (keys.length) {
-          values = allGames[keys[0]]
-          keys.shift()
-        }
+  while (1) {
+    if (!values.length) {
+      if (keys.length) {
+        values = allGames[keys[0]]
+        keys.shift()
+        yield values.shift()
+      } else {
+        return false
       }
-      return {
-        done: !values.length,
-        value: values.shift()
-      }
+    } else {
+      yield values.shift()
     }
   }
 }
