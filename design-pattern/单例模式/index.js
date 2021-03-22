@@ -141,4 +141,63 @@ const Singleton = (function () {
     // console.log(person1 === person2) // true
 }
 
+{
+    /**
+     * @description 惰性单例
+     * 需求前提，网页打开一个新的弹窗，始终是那一个div
+     * <html>
+     *     <button id="btn">点击</button>
+     * </html>
+     */
+    // 1.初始做法，页面加载时候就创建了
+    {
+        let createDiv = (function () {
+            let div = document.createElement('div')
+            div.innerHTML = '弹窗'
+            div.style.display = 'none'
+            document.appendChild(div)
+            return div
+        })()
+        document.getElementById('btn').onclick = function () {
+            createDiv.style.display = 'block'
+        }
+    }
+
+    // 2.改进做法，点击时候div才创建
+    {
+        let createDiv = function () {
+            let div = document.createElement('div')
+            div.innerHTML = '弹窗'
+            div.style.display = 'none'
+            document.appendChild(div)
+            return div
+        }
+        document.getElementById('btn').onclick = function () {
+            let loginPage = createDiv()
+            loginPage.style.display = 'block'
+        }
+    }
+    {
+        // 1和2的缺点是并不能实现单例，引入单例
+        const getSingle = function (fn) {
+            let result
+            return function () {
+                result || (result = fn.apply(this, arguments))
+            }
+        }
+        let createDiv = function () {
+            let div = document.createElement('div')
+            div.innerHTML = '弹窗'
+            div.style.display = 'none'
+            document.appendChild(div)
+            return div
+        }
+        let createSingleDiv = getSingle(createDiv)
+        document.getElementById('btn').onclick = function () {
+            let loginPage = createSingleDiv()
+            loginPage.style.display = 'block'
+        }
+    }
+}
+
 
