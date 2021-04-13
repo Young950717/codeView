@@ -19,14 +19,14 @@ class HashMap {
      * @param {string} str 要转化成比较大的数组的字符串
      * @param {number} size 将大的数字hashCode压缩到数组大小范围内
      */
-    hashFunc (str, size) {
+    hashFunc(str, size) {
         let hashCode = 0
         for (let i = 0; i < str.length; i++) {
             hashCode = 37 * hashCode + str.charCodeAt(i)
         }
         return hashCode % size
     }
-    insert (key, value) {
+    insert(key, value) {
         // 取下标
         let index = this.hashFunc(key, this.limit)
         // 寻找有没有这个桶数组
@@ -36,22 +36,27 @@ class HashMap {
             bucket = []
             this.storage[index] = bucket
         }
+        // 判断是新增还是修改原来的值.
+        let override = false
         // 遍历里面的值是否需要被修改
         for (let i = 0; i < bucket.length; i++) {
             if (bucket[i][0] === key) {
                 bucket[i][1] = value
+                override = true
                 break
             }
         }
-        bucket.push([key, value])
-        this.size++
+        if (!override) {
+            bucket.push([key, value])
+            this.size++
+        }
         this.isEmpty = this.size === 0
         // 自动扩容
         if (this.size / this.limit > EXPANSION_PROPORTION) {
             this._resize(this.getPrime(this.limit * CARDINAL_NUMBER)) //两倍扩容
         }
     }
-    get (key) {
+    get(key) {
         // 下标
         let index = this.hashFunc(key, this.limit)
         // 取桶
@@ -63,7 +68,7 @@ class HashMap {
             }
         }
     }
-    remove (key) {
+    remove(key) {
         // 下标
         let index = this.hashFunc(key, this.limit)
         // 取桶
@@ -83,7 +88,7 @@ class HashMap {
             }
         }
     }
-    _resize (newLimit) {
+    _resize(newLimit) {
         // 保存一份旧数据
         let oldStorage = this.storage
         // reset
@@ -100,7 +105,7 @@ class HashMap {
             }
         }
     }
-    _isPrime (num) {
+    _isPrime(num) {
         let temp = Math.ceil(Math.sqrt(num))
         for (let i = 2; i <= temp; i++) {
             if (num % i === 0) {
@@ -110,7 +115,7 @@ class HashMap {
         return true
     }
     // limit尽量是质数
-    getPrime (num) {
+    getPrime(num) {
         while (!this._isPrime(num)) {
             num++
         }
@@ -120,16 +125,18 @@ class HashMap {
 let hash = new HashMap()
 hash.insert('key0', 1)
 hash.insert('key1', 2)
-hash.insert('key2', 3)
+hash.insert('key1', 6)
+hash.insert('key0', 999)
+// hash.insert('key2', 3)
 hash.insert('key3', 4)
-hash.insert('key4', 5)
-hash.insert('key5', 6)
-hash.insert('key6', 7)
-hash.insert('key7', 8)
-hash.insert('key8', 9)
-hash.insert('key9', 10)
-hash.insert('key10', 11)
-hash.insert('key11', 12)
-hash.insert('key12', 12)
-hash.remove('key9')
+// hash.insert('key4', 5)
+// hash.insert('key5', 6)
+// hash.insert('key6', 7)
+// hash.insert('key7', 8)
+// hash.insert('key8', 9)
+// hash.insert('key9', 10)
+// hash.insert('key10', 11)
+// hash.insert('key11', 12)
+// hash.insert('key12', 12)
+// hash.remove('key9')
 console.log(hash)

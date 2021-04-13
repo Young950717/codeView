@@ -7,7 +7,7 @@ class BinarySearchTree {
     constructor() {
         this.root = null
     }
-    insert (data) {
+    insert(data) {
         let node = new BinarySearchTree.InnerNodeClass(data)
         if (this.root === null) {
             // 为空直接插入
@@ -16,7 +16,7 @@ class BinarySearchTree {
             this._insertNode(node, this.root)
         }
     }
-    _insertNode (newNode, node) {
+    _insertNode(newNode, node) {
         if (newNode.data > node.data) { // 比要父节点大
             if (node.right === null) {
                 node.right = newNode
@@ -32,10 +32,10 @@ class BinarySearchTree {
 
         }
     }
-    search (data) {
+    search(data) {
         return this._search(data, this.root)
     }
-    _search (data, node) {
+    _search(data, node) {
         if (node === null) {
             return false
         }
@@ -48,7 +48,8 @@ class BinarySearchTree {
         }
     }
     // 复杂
-    remove (data) {
+    remove(data) {
+        if (!this.root) return false
         // 寻找要删除的节点
         let current = this.root
         let parent = null
@@ -113,7 +114,7 @@ class BinarySearchTree {
         }
     }
     // 寻找后继节点
-    getSuccssor (delNode) {
+    getSuccssor(delNode) {
         let succssor = delNode
         let succssorParent = delNode
         let current = delNode.right
@@ -132,21 +133,21 @@ class BinarySearchTree {
     }
 
     // 中序遍历 先左子树后根节点再右子树
-    inOrderTraverse (callback) {
+    inOrderTraverse(callback) {
         this._inOrderTraverseNode(this.root, callback)
     }
-    _inOrderTraverseNode (node, callback) {
+    _inOrderTraverseNode(node, callback) {
         if (node !== null) {
-            this._preOrderTraverseNode(node.left, callback)
+            this._inOrderTraverseNode(node.left, callback)
             callback(node)
-            this._preOrderTraverseNode(node.right, callback)
+            this._inOrderTraverseNode(node.right, callback)
         }
     }
     // 先序遍历 先根节点再左子树再右子树
-    preOrderTraverse (callback) {
+    preOrderTraverse(callback) {
         this._preOrderTraverseNode(this.root, callback)
     }
-    _preOrderTraverseNode (node, callback) {
+    _preOrderTraverseNode(node, callback) {
         if (node !== null) {
             callback(node)
             this._preOrderTraverseNode(node.left, callback)
@@ -154,24 +155,24 @@ class BinarySearchTree {
         }
     }
     // 后序遍历 先左子树再右子树再根节点
-    postOrderTraverse (callback) {
+    postOrderTraverse(callback) {
         this._postOrderTraverseNode(this.root, callback)
     }
-    _postOrderTraverseNode (node, callback) {
+    _postOrderTraverseNode(node, callback) {
         if (node !== null) {
             this._postOrderTraverseNode(node.left, callback)
             this._postOrderTraverseNode(node.right, callback)
             callback(node)
         }
     }
-    getMin () {
+    getMin() {
         let node = this.root
         while (node.left !== null) {
             node = node.left
         }
         return node.data
     }
-    getMax () {
+    getMax() {
         let node = this.root
         while (node.right !== null) {
             node = node.right
@@ -192,29 +193,34 @@ BinarySearchTree.InnerNodeClass = class {
 }
 
 let bst = new BinarySearchTree()
-bst.insert(11)
-bst.insert(7)
-bst.insert(15)
-bst.insert(5)
-bst.insert(3)
-bst.insert(9)
-bst.insert(8)
-bst.insert(10)
-bst.insert(13)
+bst.insert(1)
+bst.insert(0)
+bst.insert(48)
 bst.insert(12)
-bst.insert(14)
-bst.insert(20)
-bst.insert(18)
-bst.insert(25)
-bst.insert(6)
+bst.insert(49)
+// bst.insert(11)
+// bst.insert(7)
+// bst.insert(15)
+// bst.insert(5)
+// bst.insert(3)
+// bst.insert(9)
+// bst.insert(8)
+// bst.insert(10)
+// bst.insert(13)
+// bst.insert(12)
+// bst.insert(14)
+// bst.insert(20)
+// bst.insert(18)
+// bst.insert(25)
+// bst.insert(6)
 
 // console.log(bst.getMax());
 // console.log(bst.getMin());
-bst.remove(9)
-bst.remove(7)
-bst.remove(15)
+// bst.remove(9)
+// bst.remove(7)
+// bst.remove(15)
 let str = ''
-bst.postOrderTraverse(node => {
+bst.inOrderTraverse(node => {
     str += `${node.data}-`
 })
 console.log(str);

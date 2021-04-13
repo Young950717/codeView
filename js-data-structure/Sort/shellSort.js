@@ -3,7 +3,7 @@
  * @param {Array} array 
  */
 
-function shellSort (array) {
+function shellSort(array) {
   let len = array.length
   // 初始化增量，采用原稿的length/2
   let gap = Math.floor(len / 2)

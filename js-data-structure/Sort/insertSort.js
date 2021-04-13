@@ -3,7 +3,7 @@
  * @param {Array} array 
  */
 
-function insertSort (array) {
+function insertSort(array) {
   let len = array.length
   // 外层循环，从第一个位置开始获取数据，向前面局部有序进行插入
   for (let i = 1; i < len; i++) {

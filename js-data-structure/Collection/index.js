@@ -7,7 +7,7 @@ class Collcetion {
     constructor() {
         this.item = {}
     }
-    set (data) {
+    set(data) {
         if (!this.has(data)) {
             this.item[data] = data
             return this
@@ -15,7 +15,7 @@ class Collcetion {
         // 不允许重复
         return false
     }
-    remove (data) {
+    remove(data) {
         if (!this.has(data)) {
             return false
         }
@@ -23,23 +23,23 @@ class Collcetion {
         delete this.item[data]
         return _data
     }
-    has (data) {
+    has(data) {
         return Reflect.has(this.item, data)
     }
-    clear () {
+    clear() {
         this.item = {}
     }
-    getSize () {
+    getSize() {
         return Object.keys(this.item).length
     }
-    getValues () {
+    getValues() {
         return Object.values(this.item)
     }
-    _typeCheck (target) {
+    _typeCheck(target) {
         if (!(target instanceof Collcetion)) throw ('typeof error')
     }
     // 并集
-    union (otherCollection) {
+    union(otherCollection) {
         this._typeCheck(otherCollection)
         let newCollcetion = new Collcetion()
         this.getValues().concat(otherCollection.getValues()).forEach(data => {
@@ -49,7 +49,7 @@ class Collcetion {
 
     }
     // 交集
-    intersection (otherCollection) {
+    intersection(otherCollection) {
         this._typeCheck(otherCollection)
         let newCollcetion = new Collcetion()
         this.getValues().concat(otherCollection.getValues()).forEach(data => {
@@ -60,7 +60,7 @@ class Collcetion {
     }
 
     // 差集
-    difference (otherCollection) {
+    difference(otherCollection) {
         this._typeCheck(otherCollection)
         let newCollcetion = new Collcetion()
         this.getValues().concat(otherCollection.getValues()).forEach(data => {
@@ -70,7 +70,7 @@ class Collcetion {
         return newCollcetion
     }
     // 子集
-    isSubCollection (otherCollection) {
+    isSubCollection(otherCollection) {
         this._typeCheck(otherCollection)
         if (this.getSize() > otherCollection.getSize()) return false
         let arr = otherCollection.getValues()

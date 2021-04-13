@@ -1,6 +1,6 @@
 /**
  * @description 冒泡排序，每个寻找最大/最小的排到最前面
- * @param {*Array} array 需要排序的数组
+ * @param {Array} array 需要排序的数组
  */
 // 基础版
 function bubblerSort (array) {

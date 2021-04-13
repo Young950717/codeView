@@ -7,24 +7,42 @@ class Queue {
     constructor() {
         this.item = []
     }
-    enqueue (data) {
+    enqueue(data) {
         this.item.push(data)
         return this
     }
-    dequeue () {
+    dequeue() {
         return this.item.shift()
     }
-    front () {
+    front() {
         return this.item[0]
     }
-    size () {
+    size() {
         return this.item.length
     }
-    isEmpty () {
+    isEmpty() {
         return this.item.length === 0
     }
-    toString () {
+    toString() {
         return this.item.toString()
     }
 }
+
+
+const passGame = function (list, num) {
+    const queue = new Queue()
+    list.forEach(item => {
+        queue.enqueue(item)
+    })
+
+    while (queue.size() > 1) {
+        for (let i = 0; i < num; i++) {
+            queue.enqueue(queue.dequeue())
+        }
+        queue.dequeue()
+    }
+    return queue.dequeue()
+}
+// console.log(passGame(['John', 'Jack', 'Camila', 'Ingrid', 'Carl'], 7))
+
 module.exports = Queue

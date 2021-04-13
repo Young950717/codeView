@@ -8,22 +8,22 @@ class Stack {
         this.item = []
         this.size = 0
     }
-    push (data) {
+    push(data) {
         this.item.push(data)
         this.size++
         return this
     }
-    pop () {
+    pop() {
         this.size--
         return this.item.pop()
     }
-    peek () {
+    peek() {
         return this.item[this.item.length - 1]
     }
-    isEmpty () {
+    isEmpty() {
         return this.item.length === 0
     }
-    toString () {
+    toString() {
         return this.item.toString()
     }
 }

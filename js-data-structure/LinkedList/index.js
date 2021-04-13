@@ -15,7 +15,7 @@ class LinkedList {
         this.head = null
         this.length = 0
     }
-    append (data) {
+    append(data) {
         let node = new Node(data)
         // 若长度为0 直接让头指针指向该节点
         if (this.length === 0) {
@@ -31,7 +31,7 @@ class LinkedList {
         this.length++
         return this
     }
-    insert (position, data) {
+    insert(position, data) {
         if (position < 0 || position > this.length) return 'invalid parameter'
         let node = new Node(data)
         // 排除首尾
@@ -57,7 +57,7 @@ class LinkedList {
         return true
 
     }
-    get (position) {
+    get(position) {
         if (position < 0 || position > this.length - 1) return 'invalid parameter'
         let current = this.head
         let count = 0
@@ -66,12 +66,12 @@ class LinkedList {
         }
         return current
     }
-    set (position, data) {
+    set(position, data) {
         let node = this.get(position)
         node.data = data
         return true
     }
-    indexOf (data) {
+    indexOf(data) {
         if (this.head === null) return -1
         let current = this.head
         let index = 0
@@ -85,11 +85,11 @@ class LinkedList {
         return -1
 
     }
-    remove (data) {
+    remove(data) {
         let index = this.indexOf(data)
         return this.removeAt(index)
     }
-    removeAt (position) {
+    removeAt(position) {
         if (position < 0 || position > this.length - 1) return 'invalid parameter'
         this.length--
         if (position === 0) {
@@ -102,7 +102,7 @@ class LinkedList {
         }
 
     }
-    toString () {
+    toString() {
         let str = 'head=>'
         let current = this.head
         while (current) {

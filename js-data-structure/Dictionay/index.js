@@ -7,35 +7,33 @@ class Dictionay {
     constructor() {
         this.item = {} //使用对象来模拟字典类
     }
-    // 常用方法
-    set (key, value) {
+    set(key, value) {
         this.item[key] = value
     }
-    remove (key) {
+    remove(key) {
         if (this.has(key)) {
             delete this.item[key]
             return true
         } else {
             return false
         }
-
     }
-    has (key) {
+    has(key) {
         return this.item.hasOwnProperty(key)
     }
-    get (key) {
+    get(key) {
         return this.item[key]
     }
-    clear () {
+    clear() {
         this.item = {}
     }
-    size () {
+    size() {
         return Object.keys(this.item).length
     }
-    keys () {
+    keys() {
         return Object.keys(this.item)
     }
-    values () {
+    values() {
         return Object.values(this.item)
     }
 }

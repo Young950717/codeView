@@ -3,7 +3,7 @@
  * @param {Array} array 
  */
 
-function selectSort (array) {
+function selectSort(array) {
   let len = array.length
   for (let i = 0; i < len - 1; i++) {
     let min = i //从0开始

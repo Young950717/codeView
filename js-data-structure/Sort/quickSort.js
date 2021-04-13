@@ -3,13 +3,13 @@
  */
 
 // 交换函数
-function change (array, left, right) {
+function change(array, left, right) {
   let temp = array[left]
   array[left] = array[right]
   array[right] = temp
 }
 // 获取合适的枢纽
-function getMedium (array) {
+function getMedium(array) {
   // 取出中间的位置
   let center = Math.floor(array.length / 2)
   let left = 0
@@ -28,7 +28,7 @@ function getMedium (array) {
   return center
 }
 // 递归调用
-function quickSort (array) {
+function quickSort(array) {
   if (array.length === 0) return []
   let left = []
   let right = []
